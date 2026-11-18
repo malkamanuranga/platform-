@@ -1,0 +1,15 @@
+services:
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./observability/prometheus-local.yml:/etc/prometheus/prometheus.yml:ro
